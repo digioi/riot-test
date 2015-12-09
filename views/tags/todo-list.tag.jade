@@ -1,0 +1,5 @@
+todo-list
+  ul
+    li(each="{todo in opts.store.todos}")
+      todo-item(store="{parent.opts.store}" todo="{todo}")
+  script.

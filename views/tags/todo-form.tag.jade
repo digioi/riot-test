@@ -1,0 +1,12 @@
+todo-form
+  form(onsubmit="{add}")
+    input(name="input" type="text" placeholder="New Todo" autofocus="true")
+    input(type="submit" value="Add Todo")
+  button(onclick="{clear}") Clear Completed
+  script.
+    this.add = (e) => {
+      if (this.input.value) {
+        this.input.value = ''
+      }
+    };
+    this.clear = (e) => {};
