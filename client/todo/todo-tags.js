@@ -1,0 +1,5 @@
+import riot from 'riot'
+import './tags/todo-app.tag'
+import './tags/todo-form.tag'
+import './tags/todo-item.tag'
+import './tags/todo-list.tag'
