@@ -2,7 +2,9 @@
 
 A Simple ToDo App to Learn How to Use RiotJS
 ---------------------------------------------
-Based templates and structure off <https://github.com/srackham/riot-todo/>
+Based templates and structure off
+<https://github.com/srackham/riot-todo/> and
+<https://github.com/bananaoomarang/isomorphic-redux>
 but Wanted:
   - Redux Stores
   - Jade templates

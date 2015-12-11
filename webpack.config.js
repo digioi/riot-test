@@ -6,6 +6,10 @@ module.exports = {
 		todo: "./client/todo/todo-app.js",
 		vendor: ["redux", "riot", "then-request"],
 	},
+	resolve: {
+    modulesDirectories: ['node_modules', 'shared'],
+    extensions:         ['', '.js', '.jsx']
+  },
 	output: {
 		path: path.join(__dirname, "dist"),
 		publicPath: "dist/",
@@ -34,7 +38,6 @@ module.exports = {
 			},
 		]
 	},
-	resolve: {},
 	plugins: [
 		new webpack.ProvidePlugin({}),
 		new webpack.optimize.CommonsChunkPlugin( 'vendor', 'vendor.js')

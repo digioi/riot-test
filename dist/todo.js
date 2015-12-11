@@ -1,6 +1,5 @@
-webpackJsonp([0],{
-
-/***/ 0:
+webpackJsonp([0],[
+/* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13,18 +12,16 @@ webpackJsonp([0],{
 
 	var _todoStore2 = _interopRequireDefault(_todoStore);
 
-	__webpack_require__(28);
+	__webpack_require__(15);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	_riot2.default.mixin('TodoStore', _todoStore2.default);
-	(0, _todoStore.fetchToDos)(function () {
-	  return _riot2.default.mount('*');
-	});
+	_riot2.default.mount('*');
 
 /***/ },
-
-/***/ 2:
+/* 1 */,
+/* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32,29 +29,54 @@ webpackJsonp([0],{
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.fetchToDos = exports.actionSetTodos = undefined;
 
-	var _thenRequest = __webpack_require__(3);
+	var _reducers = __webpack_require__(3);
 
-	var _thenRequest2 = _interopRequireDefault(_thenRequest);
+	var _redux = __webpack_require__(5);
 
-	var _redux = __webpack_require__(19);
+	var initialState = window.__INITIAL_STATE__;
+	exports.default = (0, _redux.createStore)(_reducers.todos, initialState);
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+/***/ },
+/* 3 */
+/***/ function(module, exports, __webpack_require__) {
 
-	function todos() {
-	  var state = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _todoReducer = __webpack_require__(4);
+
+	Object.defineProperty(exports, 'todos', {
+	  enumerable: true,
+	  get: function get() {
+	    return _todoReducer.default;
+	  }
+	});
+
+/***/ },
+/* 4 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = reducer;
+	var defaultState = [];
+
+	function reducer() {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? defaultState : arguments[0];
 	  var action = arguments[1];
 
 	  switch (action.type) {
 	    case 'ADD_TODO':
-	      state.push(action.payload);
-	      return state;
+	      return state.concat([action.payload]);
 	    case 'TOGGLE_TODO':
 	      action.payload.done = !action.payload.done;
-	      return state;
-	    case 'SET_TODOS':
-	      state = action.payload;
 	      return state;
 	    case 'CLEAR_TODOS':
 	      return state.filter(function (item) {
@@ -65,28 +87,18 @@ webpackJsonp([0],{
 	  }
 	}
 
-	var store = (0, _redux.createStore)(todos);
-	exports.default = store;
-	var actionSetTodos = exports.actionSetTodos = function actionSetTodos(data) {
-	  return {
-	    type: 'SET_TODOS',
-	    payload: data
-	  };
-	};
-
-	var fetchToDos = exports.fetchToDos = function fetchToDos(cb) {
-	  store.dispatch({ type: 'LOADING_DATA' });
-	  (0, _thenRequest2.default)('GET', '/recent').done(function (res) {
-	    var actionObj = actionSetTodos(JSON.parse(res.getBody()));
-	    console.log(actionSetTodos(JSON.parse(res.getBody())));
-	    store.dispatch(actionObj);
-	    cb();
-	  });
-	};
-
 /***/ },
-
-/***/ 28:
+/* 5 */,
+/* 6 */,
+/* 7 */,
+/* 8 */,
+/* 9 */,
+/* 10 */,
+/* 11 */,
+/* 12 */,
+/* 13 */,
+/* 14 */,
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -95,19 +107,18 @@ webpackJsonp([0],{
 
 	var _riot2 = _interopRequireDefault(_riot);
 
-	__webpack_require__(29);
+	__webpack_require__(16);
 
-	__webpack_require__(30);
+	__webpack_require__(17);
 
-	__webpack_require__(31);
+	__webpack_require__(18);
 
-	__webpack_require__(32);
+	__webpack_require__(19);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-
-/***/ 29:
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var riot = __webpack_require__(1)
@@ -115,8 +126,7 @@ webpackJsonp([0],{
 	});
 
 /***/ },
-
-/***/ 30:
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var riot = __webpack_require__(1)
@@ -136,8 +146,7 @@ webpackJsonp([0],{
 	}, '{ }');
 
 /***/ },
-
-/***/ 31:
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var riot = __webpack_require__(1)
@@ -151,8 +160,7 @@ webpackJsonp([0],{
 	}, '{ }');
 
 /***/ },
-
-/***/ 32:
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var riot = __webpack_require__(1)
@@ -167,5 +175,4 @@ webpackJsonp([0],{
 	}, '{ }');
 
 /***/ }
-
-});
+]);
