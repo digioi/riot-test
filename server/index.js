@@ -14,15 +14,25 @@ fs.readdirSync(`${__dirname}/../client/todo/tags`).map((file)=> {
 
 import store from '../client/todo/todo-store.js'
 riot.mixin('TodoStore', store)
+const initalData = [
+  {title: 'Cached Data :#'}
+]
 
 const app = express()
 app.set('view engine', 'jade')
 app.set('views', `${__dirname}/../views`)
 app.use(express.static('dist'));
 app.get('/', (req, res)=>{
+  riot.mixin('TodoStore').dispatch({
+    type: 'SET_TODOS',
+    payload: initalData
+  })
+
   const initialRender = riot.render('todo-app')
   res.render('index',{ initialRender })
 })
-
+app.get('/recent', (req,res) =>
+  res.type('json').send(initalData)
+)
 
 app.listen(process.env.PORT || 3000, ()=> console.log('App Started ....'))

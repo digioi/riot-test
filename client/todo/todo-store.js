@@ -2,7 +2,6 @@
 import { createStore } from 'redux'
 let initialState = []
 function todos(state=initialState, action){
-  console.log(state, action)
   switch(action.type){
     case 'ADD_TODO':
       state.push(action.payload)
@@ -15,7 +14,6 @@ function todos(state=initialState, action){
       return state
     case 'CLEAR_TODOS':
       return state.filter( item => {
-        console.log(item)
         return !item.done
       })
     default:

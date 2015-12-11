@@ -3,7 +3,8 @@ var webpack = require("webpack");
 module.exports = {
 	cache: true,
 	entry: {
-		todo: "./client/todo/todo-app.js"
+		todo: "./client/todo/todo-app.js",
+		vendor: ["redux", "riot", "then-request"],
 	},
 	output: {
 		path: path.join(__dirname, "dist"),
@@ -35,6 +36,7 @@ module.exports = {
 	},
 	resolve: {},
 	plugins: [
-		new webpack.ProvidePlugin({})
+		new webpack.ProvidePlugin({}),
+		new webpack.optimize.CommonsChunkPlugin( 'vendor', 'vendor.js')
 	]
 }
