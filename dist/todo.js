@@ -125,13 +125,12 @@ webpackJsonp([0],{
 /***/ function(module, exports, __webpack_require__) {
 
 	var riot = __webpack_require__(1)
-	riot.tag2('todo-item', '<span onclick="{toggle}" class="{done: todo.done}">{todo.title}</span>', 'todo-item,[riot-tag="todo-item"] { cursor: pointer; } todo-item .done,[riot-tag="todo-item"] .done { text-decoration: line-through; }', 'template="jade"', function(opts) {
+	riot.tag2('todo-item', '<span onclick="{toggle}" class="{done: done}">{title}</span>', 'todo-item,[riot-tag="todo-item"] { cursor: pointer; display: block; } todo-item .done,[riot-tag="todo-item"] .done { text-decoration: line-through; }', 'template="jade"', function(opts) {
 	  var _this = this;
 
 	  var store = this.mixin('TodoStore');
-	  this.todo = opts.todo;
 	  this.toggle = function () {
-	    store.dispatch({ type: 'TOGGLE_TODO', payload: _this.todo });
+	    store.dispatch({ type: 'TOGGLE_TODO', payload: _this });
 	  };
 	}, '{ }');
 
@@ -141,16 +140,14 @@ webpackJsonp([0],{
 /***/ function(module, exports, __webpack_require__) {
 
 	var riot = __webpack_require__(1)
-	riot.tag2('todo-list', '<ul> <li each="{todo in todos}"> <todo-item todo="{todo}"></todo-item> </li> </ul>', '', 'template="jade"', function(opts) {
-	  var _this = this;
+	riot.tag2('todo-list', '<todo-item each="{todos}"></todo-item>', '', 'template="jade"', function(opts) {
+	    var _this = this;
 
-	  var store = this.mixin('TodoStore');
-	  this.todos = store.getState();
-	  store.subscribe(function (state) {
-	    console.log('update should occur');
-	    //- this.todos = store.getState()
-	    _this.update();
-	  });
+	    var store = this.mixin('TodoStore');
+	    this.todos = store.getState();
+	    store.subscribe(function (state) {
+	        return _this.update();
+	    });
 	}, '{ }');
 
 /***/ }
