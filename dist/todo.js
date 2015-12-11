@@ -23,7 +23,6 @@ webpackJsonp([0],{
 
 	_riot2.default.mixin('TodoStore', _todoStore2.default);
 	(0, _thenRequest2.default)('GET', '/recent').done(function (res) {
-	  console.log(JSON.parse(res.getBody()));
 	  _riot2.default.mixin('TodoStore').dispatch({
 	    type: 'SET_TODOS',
 	    payload: JSON.parse(res.getBody())
@@ -131,9 +130,7 @@ webpackJsonp([0],{
 
 	  var store = this.mixin('TodoStore');
 	  this.todo = opts.todo;
-	  console.log(this.todo, 'toggler');
 	  this.toggle = function () {
-	    console.log(_this.todo, 'toggle');
 	    store.dispatch({ type: 'TOGGLE_TODO', payload: _this.todo });
 	  };
 	}, '{ }');
@@ -150,8 +147,8 @@ webpackJsonp([0],{
 	  var store = this.mixin('TodoStore');
 	  this.todos = store.getState();
 	  store.subscribe(function (state) {
-	    console.log('update should occur', store.getState(), state);
-	    _this.todos = store.getState();
+	    console.log('update should occur');
+	    //- this.todos = store.getState()
 	    _this.update();
 	  });
 	}, '{ }');
