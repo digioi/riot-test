@@ -8,13 +8,16 @@ function todos(state=initialState, action){
       state.push(action.payload)
       return state
     case 'TOGGLE_TODO':
-      action.payload.done = !action.payload.done;
+      action.payload.done = !action.payload.done
       return state
     case 'SET_TODOS':
       state = action.payload
       return state
     case 'CLEAR_TODOS':
-      return state.filter(todoItem => !todoItem.done);
+      return state.filter( item => {
+        console.log(item)
+        return !item.done
+      })
     default:
       return state
   }

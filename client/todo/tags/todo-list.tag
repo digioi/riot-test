@@ -6,6 +6,8 @@ todo-list(template='jade')
   script.
     const store = this.mixin('TodoStore')
     this.todos = store.getState()
-    store.subscribe( () =>
+    store.subscribe( (state) => {
+      console.log('update should occur', store.getState(), state)
       this.todos = store.getState()
-    )
+      this.update()
+    })

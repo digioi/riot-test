@@ -13,5 +13,5 @@ todo-form(template='jade')
       }
     }
     this.clear = (e) => {
-      store.dispatch({type: 'ADD_TODO'})
+      store.dispatch({type: 'CLEAR_TODOS'})
     }

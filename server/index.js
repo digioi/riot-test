@@ -8,9 +8,12 @@ fs.readdirSync(`${__dirname}/../client/todo/tags`).map((file)=> {
       options: "{presets: ['es2015']}",
       template: 'jade'
   })
-  console.log(src)
-  eval(src)
+
+  module._compile(src, file)
 })
+
+import store from '../client/todo/todo-store.js'
+riot.mixin('TodoStore', store)
 
 const app = express()
 app.set('view engine', 'jade')
@@ -18,7 +21,7 @@ app.set('views', `${__dirname}/../views`)
 app.use(express.static('dist'));
 app.get('/', (req, res)=>{
   const initialRender = riot.render('todo-app')
-  res.render('index',{ initialRender: 'hi' })
+  res.render('index',{ initialRender })
 })
 
 
