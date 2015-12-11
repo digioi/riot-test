@@ -13,21 +13,13 @@ webpackJsonp([0],{
 
 	var _todoStore2 = _interopRequireDefault(_todoStore);
 
-	var _thenRequest = __webpack_require__(13);
-
-	var _thenRequest2 = _interopRequireDefault(_thenRequest);
-
 	__webpack_require__(28);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	_riot2.default.mixin('TodoStore', _todoStore2.default);
-	(0, _thenRequest2.default)('GET', '/recent').done(function (res) {
-	  _riot2.default.mixin('TodoStore').dispatch({
-	    type: 'SET_TODOS',
-	    payload: JSON.parse(res.getBody())
-	  });
-	  _riot2.default.mount('*');
+	(0, _todoStore.fetchToDos)(function () {
+	  return _riot2.default.mount('*');
 	});
 
 /***/ },
@@ -40,12 +32,18 @@ webpackJsonp([0],{
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.fetchToDos = exports.actionSetTodos = undefined;
 
-	var _redux = __webpack_require__(3);
+	var _thenRequest = __webpack_require__(3);
 
-	var initialState = [];
+	var _thenRequest2 = _interopRequireDefault(_thenRequest);
+
+	var _redux = __webpack_require__(19);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 	function todos() {
-	  var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
 	  var action = arguments[1];
 
 	  switch (action.type) {
@@ -66,7 +64,25 @@ webpackJsonp([0],{
 	      return state;
 	  }
 	}
-	exports.default = (0, _redux.createStore)(todos);
+
+	var store = (0, _redux.createStore)(todos);
+	exports.default = store;
+	var actionSetTodos = exports.actionSetTodos = function actionSetTodos(data) {
+	  return {
+	    type: 'SET_TODOS',
+	    payload: data
+	  };
+	};
+
+	var fetchToDos = exports.fetchToDos = function fetchToDos(cb) {
+	  store.dispatch({ type: 'LOADING_DATA' });
+	  (0, _thenRequest2.default)('GET', '/recent').done(function (res) {
+	    var actionObj = actionSetTodos(JSON.parse(res.getBody()));
+	    console.log(actionSetTodos(JSON.parse(res.getBody())));
+	    store.dispatch(actionObj);
+	    cb();
+	  });
+	};
 
 /***/ },
 

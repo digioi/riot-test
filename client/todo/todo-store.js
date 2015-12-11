@@ -1,7 +1,8 @@
 'use strict';
+import request from 'then-request'
 import { createStore } from 'redux'
-let initialState = []
-function todos(state=initialState, action){
+
+function todos(state=[], action){
   switch(action.type){
     case 'ADD_TODO':
       state.push(action.payload)
@@ -20,4 +21,22 @@ function todos(state=initialState, action){
       return state
   }
 }
-export default createStore(todos)
+
+const store = createStore(todos)
+export default store
+
+export const actionSetTodos = data => (
+  {
+    type: 'SET_TODOS',
+    payload: data
+  }
+)
+
+export const fetchToDos = cb => {
+  store.dispatch({type: 'LOADING_DATA'});
+  request('GET', '/recent').done( res => {
+    const actionObj = actionSetTodos(JSON.parse(res.getBody()))
+    store.dispatch(actionObj)
+    cb();
+  })
+}

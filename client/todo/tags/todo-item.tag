@@ -1,4 +1,4 @@
-|var riot = require('riot')
+| var riot = require('riot')
 todo-item(template='jade')
   span(class="{done: done}" onclick="{toggle}") {title}
   style(scoped type="text/css").

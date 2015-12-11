@@ -1,4 +1,4 @@
-|var riot = require('riot')
+| var riot = require('riot')
 todo-form(template='jade')
   form(onsubmit="{add}")
     input(name="input" type="text" placeholder="New Todo" autofocus="true")

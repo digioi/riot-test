@@ -1,5 +1,5 @@
-|var riot = require('riot')
-todo-list(template='jade')  
+| var riot = require('riot')
+todo-list(template='jade')
   todo-item(each="{todos}")
   script.
     const store = this.mixin('TodoStore')
